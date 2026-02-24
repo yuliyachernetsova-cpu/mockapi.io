@@ -1,5 +1,5 @@
 name: MockAPI Tests
-on: [push] # Запуск при каждом обновлении кода
+on: [push] # Запуск при каждом обновлении код
 
 jobs:
   run-newman:
