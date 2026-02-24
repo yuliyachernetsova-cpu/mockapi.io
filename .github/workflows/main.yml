@@ -1,5 +1,14 @@
 name: MockAPI Tests
-on: [push] # Запуск при каждом обновлении код
+on:
+  # 1. Запуск при каждом пуше в репозиторий
+  push:
+    branches:
+      - main
+      - master
+
+  # 2. Добавляет кнопку "Run workflow" во вкладке Actions (для ручного запуска)
+  workflow_dispatch:
+
 
 jobs:
   run-newman:
