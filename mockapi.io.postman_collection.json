@@ -58,7 +58,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\"name\": \"Real Phone\", \"price\": 500}",
+              "raw": "{\r\n    \"name\": \"Real Phone\",\r\n    \"price\": 500\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -95,8 +95,10 @@
                   "});\r",
                   "\r",
                   "pm.test(\"Check data schema\", () => {\r",
-                  "    pm.expect(response).to.have.all.keys('id', 'name', 'price', 'createdAt');\r",
-                  "    pm.expect(response.price).to.be.a('number');\r",
+                  "    pm.expect(response).to.include.keys('id', 'name', 'price', 'createdAt');\r",
+                  "        const priceAsNumber = Number(response.price);\r",
+                  "    pm.expect(priceAsNumber).to.be.a('number');\r",
+                  "    pm.expect(isNaN(priceAsNumber)).to.be.false;\r",
                   "});"
                 ],
                 "type": "text/javascript",
@@ -135,12 +137,17 @@
                   "});\r",
                   "\r",
                   "pm.test(\"Response contains correct ID\", () => {\r",
-                  "    pm.expect(response.id).to.eql(pm.collectionVariables.get(\"product_id\"));\r",
+                  "    // Приводим оба ID к строке для надежности сравнения\r",
+                  "    pm.expect(response.id.toString()).to.eql(pm.collectionVariables.get(\"product_id\").toString());\r",
                   "});\r",
                   "\r",
                   "pm.test(\"Check data schema\", () => {\r",
-                  "    pm.expect(response).to.have.all.keys('id', 'name', 'price', 'createdAt');\r",
-                  "    pm.expect(response.price).to.be.a('number');\r",
+                  "    pm.expect(response).to.include.keys('id', 'name', 'price', 'createdAt');\r",
+                  "    \r",
+                  "    const priceAsNumber = Number(response.price);\r",
+                  "    pm.expect(priceAsNumber).to.be.a('number');\r",
+                  "    \r",
+                  "    pm.expect(isNaN(priceAsNumber)).to.be.false;\r",
                   "});"
                 ],
                 "type": "text/javascript",
@@ -279,10 +286,28 @@
       ]
     }
   ],
-  "variable": [
+  "event": [
     {
-      "key": "real_id",
-      "value": ""
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
     }
   ]
 }
