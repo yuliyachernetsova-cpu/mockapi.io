@@ -137,7 +137,7 @@
                   "});\r",
                   "\r",
                   "pm.test(\"Response contains correct ID\", () => {\r",
-                  "    // Приводим оба ID к строке для надежности сравнения\r",
+                  "    // Convert both IDs to a string to ensure reliable comparison\r",
                   "    pm.expect(response.id.toString()).to.eql(pm.collectionVariables.get(\"product_id\").toString());\r",
                   "});\r",
                   "\r",
