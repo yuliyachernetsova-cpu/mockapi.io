@@ -1,25 +1,24 @@
 name: MockAPI Tests
-on: [push] # Запуск при каждом обновлении кода
+on: [push] # Run on each code update
 
 jobs:
   run-newman:
     runs-on: ubuntu-latest
     steps:
-      # 1. Загружаем файлы из репозитория в облако GitHub
+      # 1. Upload files from the repository in the GitHub cloud
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 2. Устанавливаем Node.js
+      # 2. Install Node.js
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '18'
 
-      # 3. Устанавливаем Newman
+      # 3. Install Newman
       - name: Install Newman
         run: npm install -g newman
 
-      # 4. Запускаем тесты
+      # 4. Run tests
       - name: Run Tests
-        # Если есть файл окружения, добавьте: -e environment.json
         run: newman run mockapi.io.postman_collection.json -e mockapi.io.postman_environment.json --reporters cli
