@@ -19,14 +19,9 @@ jobs:
       - name: Install Newman
         run: npm install -g newman
 
-      - name: Run API Tests with Debug
+      - name: Run Postman Tests
         run: |
-          # 1. Check if Secret is actually coming through
-          if [ -z "${{ secrets.API_BASE_URL }}" ]; then echo "!!! SECRET IS EMPTY !!!"; fi
-          
-          # 2. Run Newman and FORCE it to show the URL it's using 
           newman run mockapi.io.postman_collection.json \
             -e mockapi.io.postman_environment.json \
             --env-var "mockapi_url=${{ secrets.API_BASE_URL }}" \
-            --reporters cli \
-            --verbose
+            --reporters cli
