@@ -21,4 +21,4 @@ jobs:
 
       # 4. Run tests
       - name: Run Tests
-        run: newman run mockapi.io.postman_collection.json -e mockapi.io.postman_environment.json --reporters cli
+        run: newman run mockapi.io.postman_collection.json -e mockapi.io.postman_environment.json --env-var "baseUrl=${{ secrets.API_BASE_URL }} --reporters cli
