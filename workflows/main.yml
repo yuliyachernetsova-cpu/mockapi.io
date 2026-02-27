@@ -19,6 +19,7 @@ jobs:
       - name: Install Newman
         run: npm install -g newman
 
+      # 4. Run Tests
       - name: Run Postman Tests
         run: |
           newman run mockapi.io.postman_collection.json \
